@@ -1,7 +1,6 @@
 package com.mini.sys.query;
 
 import com.mini.common.annotations.Query;
-import com.mini.common.annotations.Table;
 import com.mini.common.base.query.BaseQuery;
 import com.mini.common.enums.Operate;
 import lombok.Data;

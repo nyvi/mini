@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 public @interface Table {
     /**
      * 表名称
-     * @return
+     * @return 表名称
      */
     String value() default "";
 }

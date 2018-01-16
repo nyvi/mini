@@ -13,13 +13,13 @@ import java.lang.annotation.*;
 public @interface Column {
     /**
      * 字段名
-     * @return
+     * @return 字段名称
      */
     String value() default "";
 
     /**
      * 是否主键,默认false
-     * @return
+     * @return true主键/false非主键
      */
     boolean isKey() default false;
 }

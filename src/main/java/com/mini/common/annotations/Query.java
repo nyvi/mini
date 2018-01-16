@@ -15,25 +15,25 @@ import java.lang.annotation.*;
 public @interface Query {
     /**
      * 字段名
-     * @return
+     * @return 字段名称
      */
     String value() default "";
 
     /**
      * 操作符
-     * @return
+     * @return 操作符
      */
     Operate operate() default Operate.EQ;
 
     /**
      * 参数内容前缀
-     * @return
+     * @return 参数内容前缀
      */
     String prefix() default "";
 
     /**
      * 参数内容后缀
-     * @return
+     * @return 参数内容后缀
      */
     String suffix() default "";
 }

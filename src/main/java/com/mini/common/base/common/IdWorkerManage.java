@@ -27,7 +27,7 @@ public class IdWorkerManage {
 
     /**
      * 获取唯一id
-     * @return
+     * @return id
      */
     public static long getId() {
         return getIdWorkerInstance().getId();

@@ -34,11 +34,12 @@ class IdWorker {
     /**
      * 支持的最大机器id,结果是31 (这个移位算法可以很快的计算出几位二进制数所能表示的最大十进制数)
      */
-    private final long maxWorkerId = -1L ^ (-1L << workerIdBits);
+    private final long maxWorkerId = ~(-1L << workerIdBits);
+
     /**
      * 支持的最大数据标识id,结果是31
      */
-    private final long maxDatacenterId = -1L ^ (-1L << datacenterIdBits);
+    private final long maxDatacenterId = ~(-1L << datacenterIdBits);
     /**
      * 序列在id中占的位数
      */
@@ -58,7 +59,7 @@ class IdWorker {
     /**
      * 生成序列的掩码，这里为4095 (0b111111111111=0xfff=4095)
      */
-    private final long sequenceMask = -1L ^ (-1L << sequenceBits);
+    private final long sequenceMask = ~(-1L << sequenceBits);
     /**
      * 上次生成ID的时间截
      */
@@ -69,7 +70,7 @@ class IdWorker {
      * @param workerId 工作id (0~31)
      * @param datacenterId 数据中心id (0~31)
      */
-    public IdWorker(long workerId, long datacenterId) {
+     IdWorker(long workerId, long datacenterId) {
         if (workerId > maxWorkerId || workerId < 0) {
             throw new IllegalArgumentException(String.format("workerId 不能大于 %d 或小于  0", maxWorkerId));
         }
@@ -82,9 +83,9 @@ class IdWorker {
 
     /**
      * 获得下一个ID (该方法是线程安全的)
-     * @return
+     * @return id
      */
-    protected synchronized long nextId() {
+    private synchronized long nextId() {
 
         long timestamp = timeGen();
         //如果当前时间小于上一次id生成的时间戳,说明系统时钟回退过这个时候应当抛出异常
@@ -119,7 +120,7 @@ class IdWorker {
      * @param lastTimestamp 上次生成ID的时间截
      * @return 当前时间戳
      */
-    protected long tilNextMillis(long lastTimestamp) {
+    private long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
             timestamp = timeGen();
@@ -128,13 +129,17 @@ class IdWorker {
     }
 
     /**
-     * 当前时间戳
-     * @return
+     * 获取当前时间戳
+     * @return 当前时间戳
      */
-    protected long timeGen() {
+    private long timeGen() {
         return System.currentTimeMillis();
     }
 
+    /**
+     * 获取id
+     * @return id
+     */
     public long getId() {
         return nextId();
     }
