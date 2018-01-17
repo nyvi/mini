@@ -6,33 +6,16 @@ server:
 #数据库配置
 spring:
     datasource:
-        driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/mini?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true
-        username: root
-        password: 123456
-    freemarker:
-        allow-request-override: true
-        allow-session-override: true
-        cache: false
-        charset: UTF-8
-        check-template-location: true
-        content-type: text/html
-        enabled: true
-        expose-request-attributes: true
-        expose-session-attributes: true
-        expose-spring-macro-helpers: true
-        request-context-attribute: request
-        prefer-file-system-access: true
-        suffix: .ftl
-        order: 1
-        template-loader-path: classpath:/templates/
-        settings:
-            template_update_delay: 0
-            default_encoding: UTF-8
-            number_format: 0.##########
-            datetime_format: yyyy-MM-dd HH:mm:ss
-            classic_compatible: true
-            template_exception_handler: ignore
+        druid:
+            driver-class-name: com.mysql.jdbc.Driver
+            url: jdbc:mysql://127.0.0.1:3306/mini?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false&rewriteBatchedStatements=true
+            username: root
+            password: 123456
+            filters: stat,wall
+            stat-view-servlet:
+                url-pattern: /druid/*
+                login-username: admin
+                login-password: admin
     http:
         multipart:
             max-file-size: 1024MB
