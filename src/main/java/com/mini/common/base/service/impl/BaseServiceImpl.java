@@ -5,6 +5,7 @@ import com.mini.common.base.model.BaseDO;
 import com.mini.common.base.query.BaseQuery;
 import com.mini.common.base.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +28,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      * @return 影响行数
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int save(T t) {
         return baseDAO.save(t);
     }
@@ -37,6 +39,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      * @return 影响行数
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int update(T t) {
         return baseDAO.update(t);
     }
@@ -47,6 +50,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      * @return 影响行数
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int saveOrUpdate(T t) {
         if (Objects.isNull(t.getId())) {
             return baseDAO.save(t);
@@ -60,6 +64,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      * @return 影响行数
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int batchSave(List<T> list) {
         return baseDAO.batchSave(list);
     }
@@ -70,6 +75,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      * @return 影响行数
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int delete(Long id) {
         return baseDAO.delete(id);
     }
@@ -80,6 +86,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      * @return 影响行数
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int batchDelete(List<Long> idList) {
         return baseDAO.batchDelete(idList);
     }
