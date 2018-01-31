@@ -13,9 +13,14 @@ import java.io.Serializable;
 public class BaseQuery implements Serializable {
 
     /**
+	 * 序列号
+	 */
+	private static final long serialVersionUID = -7487619981883834206L;
+
+	/**
      * 页码
      */
-    private Integer page = 1;
+    private Integer pageNumber = 1;
 
     /**
      * 每页显示个数

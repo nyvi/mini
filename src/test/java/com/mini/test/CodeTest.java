@@ -20,18 +20,16 @@ import java.util.List;
 @SpringBootTest(classes = Application.class)
 public class CodeTest {
 
-    @Autowired
-    private SysUserService sysUserService;
+	@Autowired
+	private SysUserService sysUserService;
 
-    @Test
-    public void ListTest() {
-        SysUserQuery query = new SysUserQuery();
-        query.setName("么");
-        List<SysUserDO> list = sysUserService.getList(query);
-        System.out.println(list.size());
-        list.forEach(f -> {
-            System.out.println(f.toString());
-        });
-    }
+	@Test
+	public void ListTest() {
+		SysUserQuery query = new SysUserQuery().setUsername("T");
+		List<SysUserDO> list = sysUserService.getList(query);
+		list.forEach(f -> {
+			System.out.println(f.toString());
+		});
+	}
 
 }

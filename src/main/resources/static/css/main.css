@@ -1,0 +1,162 @@
+@charset "UTF-8";
+html,body,div,p,img,a,h2,span{
+    margin:0;
+    padding:0;
+    font-family: "微软雅黑",Arial;
+}
+a{
+    text-decoration: none;
+}
+img{
+    display:block;
+}
+.clearfix {
+    zoom:1;
+}
+.clearfix:after {
+    clear:both;
+    content:'.';
+    display:block;
+    width: 0;
+    height: 0;
+    visibility:hidden;
+}
+.main{
+    padding:0px 3%;
+}
+.main h2{
+    padding: 10px 30px;
+    color:#666;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+.data_wrap h2{
+    background:url(img/data.png) no-repeat left center;
+}
+.data_list{
+    background: #fff;
+    border:1px solid #dedede;
+}
+.data_list img,.quick_list img{
+    margin:0 auto;
+}
+.data_item{
+    width:16.66%;
+    float: left;
+    color:#666;
+    font-size: 14px;
+    text-align: center;
+    padding:40px 0;
+}
+.data_item p{
+    margin:20px 0 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.data_item span{
+    font-size: 28px;
+}
+.data_item_1 span{
+    color:#34bbfd;
+}
+.data_item_2 span{
+    color:#4189dd;
+}
+.data_item_3 span{
+    color:#f7c028;
+}
+.data_item_4 span{
+    color:#f55a58;
+}
+.data_item_5 span{
+    color:#2fd38a;
+}
+.data_item_6 span{
+    color:#2fd3ee ;
+}
+.quick_warn{
+    margin-top:10px;
+}
+.quick_wrap h2{
+    background:url(img/quick.png) no-repeat left center;
+}
+.quick_wrap{
+    float:left;
+    margin-right: 2%;
+    width:49%;
+    height:296px;
+}
+.quick_list,.warn_list{
+    border:1px solid #dedede;
+    background: #fff;
+    padding:20px 2%;
+    height:256px;
+}
+.quick_list{
+    overflow-y: auto;
+}
+.warn_list{
+    overflow: hidden;
+    position:relative;
+}
+.more_btn{
+	position:absolute;
+	display:block;
+	right:3%;
+	top:10px;
+	color:#999;
+}
+.quick_item{
+    width:25%;
+    float:left;
+    text-align: center;
+    color:#666;
+    font-size: 14px;
+    padding:20px 0;
+}
+.quick_item span{
+    display:block;
+    margin-top:10px;
+}
+.warn_wrap{
+    float:right;
+    width:49%;
+}
+.warn_wrap h2{
+    background:url(img/warn.png) no-repeat left center;
+}
+.warn_item{
+    display:block;
+    margin:20px 10px;
+    font-size: 14px;
+}
+.warn_item p{
+    color:#656565;
+    float:left;
+    width:60%;
+    height:20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+.warn_item span{
+    float:right;
+    color:#999;
+}
+.footer{
+    color:#999;
+    font-size: 14px;
+    text-align: center;
+    position: fixed;
+    bottom:0;
+    padding:10px;
+    width:100%;
+}

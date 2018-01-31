@@ -1,10 +1,12 @@
 package com.mini.common.base.model;
 
-import com.mini.common.annotations.Column;
-import lombok.Data;
-
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.mini.common.annotations.Column;
+
+import lombok.Data;
 
 /**
  * BaseDO
@@ -14,23 +16,25 @@ import java.util.Date;
 @Data
 public class BaseDO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * 主键
-     */
-    @Column(value = "id", isKey = true)
-    private Long id;
+	/**
+	 * 主键
+	 */
+	@Column(value = "id", isKey = true)
+	private Long id;
 
-    /**
-     * 创建时间
-     */
-    @Column(value = "gmt_create")
-    private Date gmtCreate;
+	/**
+	 * 创建时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
+	@Column(value = "gmt_create")
+	private Date gmtCreate;
 
-    /**
-     * 修改时间
-     */
-    @Column(value = "gmt_modified")
-    private Date gmtModified;
+	/**
+	 * 修改时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm", timezone = "GMT+8")
+	@Column(value = "gmt_modified")
+	private Date gmtModified;
 }

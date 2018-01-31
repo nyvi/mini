@@ -2,6 +2,7 @@ package com.mini.common.base.service;
 
 import com.mini.common.base.model.BaseDO;
 import com.mini.common.base.query.BaseQuery;
+import com.mini.common.dto.TableData;
 
 import java.util.List;
 
@@ -17,42 +18,42 @@ public interface BaseService<T extends BaseDO> {
      * @param t 实体
      * @return 影响行数
      */
-    int save(T t);
+	int save(T t) throws Exception;
 
     /**
      * 更新非空字段,id不能为空
      * @param t 实体
      * @return 影响行数
      */
-    int update(T t);
+    int update(T t) throws Exception;
 
     /**
      * 更新或保存,id为空时保存,非空更新
      * @param t 实体
      * @return 影响行数
      */
-    int saveOrUpdate(T t);
+    int saveOrUpdate(T t) throws Exception;
 
     /**
      * 批量保存
      * @param list 实体集合
      * @return 影响行数
      */
-    int batchSave(List<T> list);
+    int batchSave(List<T> list) throws Exception;
 
     /**
      * 删除
      * @param id 主键
      * @return 影响行数
      */
-    int delete(Long id);
+    int delete(Long id) throws Exception;
 
     /**
      * 批量删除
      * @param idList id集合
      * @return 影响行数
      */
-    int batchDelete(List<Long> idList);
+    int batchDelete(List<Long> idList) throws Exception;
 
     /**
      * 查询总数
@@ -74,4 +75,11 @@ public interface BaseService<T extends BaseDO> {
      * @return 返回列表
      */
     <Q extends BaseQuery> List<T> getList(Q query);
+    
+    /**
+     * 查询表格列表
+     * @param query 查询条件
+     * @return 表格显示对象
+     */
+    <Q extends BaseQuery> TableData<T> getTableData(Q query);
 }

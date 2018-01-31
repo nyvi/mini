@@ -4,6 +4,8 @@ import com.mini.common.base.dao.BaseDAO;
 import com.mini.common.base.model.BaseDO;
 import com.mini.common.base.query.BaseQuery;
 import com.mini.common.base.service.BaseService;
+import com.mini.common.dto.TableData;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,9 +31,9 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int save(T t) {
-        return baseDAO.save(t);
-    }
+	public int save(T t) throws Exception {
+		return baseDAO.save(t);
+	}
 
     /**
      * 更新非空字段,id不能为空
@@ -40,7 +42,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int update(T t) {
+    public int update(T t) throws Exception {
         return baseDAO.update(t);
     }
 
@@ -51,7 +53,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int saveOrUpdate(T t) {
+    public int saveOrUpdate(T t) throws Exception {
         if (Objects.isNull(t.getId())) {
             return baseDAO.save(t);
         }
@@ -65,7 +67,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int batchSave(List<T> list) {
+    public int batchSave(List<T> list) throws Exception {
         return baseDAO.batchSave(list);
     }
 
@@ -76,7 +78,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int delete(Long id) {
+    public int delete(Long id) throws Exception {
         return baseDAO.delete(id);
     }
 
@@ -87,7 +89,7 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public int batchDelete(List<Long> idList) {
+    public int batchDelete(List<Long> idList) throws Exception {
         return baseDAO.batchDelete(idList);
     }
 
@@ -120,4 +122,15 @@ public class BaseServiceImpl<T extends BaseDO> implements BaseService<T> {
     public <Q extends BaseQuery> List<T> getList(Q query) {
         return baseDAO.getList(query);
     }
+
+    
+	@Override
+	public <Q extends BaseQuery> TableData<T> getTableData(Q query) {
+		int count = this.getCount(query);
+		if (count > 0) {
+			List<T> list = this.getList(query);
+			return TableData.bulid(count, list);
+		}
+		return TableData.empty();
+	}
 }
