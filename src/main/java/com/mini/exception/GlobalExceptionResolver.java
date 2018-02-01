@@ -1,4 +1,4 @@
-package com.mini.common.exception;
+package com.mini.exception;
 
 import java.io.IOException;
 
@@ -15,6 +15,11 @@ import com.mini.common.dto.JsonResult;
 
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * 全局异常控制
+ * @author czk
+ * @date 2018-02-01
+ */
 @Log4j2
 @ControllerAdvice
 public class GlobalExceptionResolver {
@@ -33,14 +38,12 @@ public class GlobalExceptionResolver {
 		if (StringUtils.isBlank(requestType)) {
 			return new ModelAndView("/error/500");
 		} else {
-			JsonResult result = JsonResult.error("系统异常，请稍后重试！");
-			String jsonString = JSON.toJSONString(result);
 			response.setCharacterEncoding("UTF-8");
 			response.setContentType("application/json; charset=utf-8");
+			JsonResult result = JsonResult.error("系统异常，请稍后重试！");
 			try {
-				response.getWriter().write(jsonString);
+				response.getWriter().write(JSON.toJSONString(result));
 				response.getWriter().flush();
-				return null;
 			} catch (IOException e) {
 				log.error(e.getMessage());
 			}

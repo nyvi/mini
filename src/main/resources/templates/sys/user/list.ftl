@@ -41,7 +41,7 @@
 								<thead>
 									<tr>
 										<th data-checkbox="true"></th>
-							    		<th data-field="username">用户名</th>
+							    		<th data-field="username" data-sortable="true">用户名</th>
 							    		<th data-field="phone">手机号</th>
 							    		<th data-field="gmtCreate">创建时间</th>
 							    		<th data-field="gmtModified">修改时间</th>
@@ -61,7 +61,7 @@
 		
 			// 查询
 			$("#search").click(function(){
-				$("#table").bootstrapTable('refresh');
+				$("#table").bootstrapTable('refresh', {'pageNumber':1});
 				return;
 			})
 			

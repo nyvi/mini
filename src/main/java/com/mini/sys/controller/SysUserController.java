@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mini.common.annotations.Log;
 import com.mini.common.dto.JsonResult;
 import com.mini.common.dto.TableData;
 import com.mini.common.util.ErrorUtil;
@@ -64,12 +65,22 @@ public class SysUserController {
 	 * 列表数据
 	 * @return
 	 */
+	@Log
 	@ResponseBody
 	@PostMapping("getTableData")
 	public TableData<SysUserDO> getTableData(SysUserQuery query) {
 		return sysUserService.getTableData(query);
 	}
 	
+	/**
+	 * 获取所有用户列表 前100就好
+	 * @return
+	 */
+	@ResponseBody
+	@GetMapping(value = "getList")
+	public List<SysUserDO> getList(SysUserQuery query){
+		return sysUserService.getList(query);
+	}
 	
 	/**
 	 * 保存/更新

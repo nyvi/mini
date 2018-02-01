@@ -71,7 +71,6 @@ $(function() {
 
 	// 表单回车不自动提交
 	$("form").keydown(function() {
-		// onkeydown="if(event.keyCode==13)return false;"
 		if (event.keyCode == 13)
 			return false;
 	})

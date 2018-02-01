@@ -6,6 +6,7 @@ import com.mini.common.enums.Operate;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 /**
@@ -16,6 +17,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @SuppressWarnings("serial")
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 public class SysUserQuery extends BaseQuery {
 

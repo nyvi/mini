@@ -279,7 +279,7 @@
         height: undefined,
         undefinedText: '-',
         sortName: undefined,
-        sortOrder: 'asc	',
+        sortOrder: 'asc',
         sortStable: false,
         columns: [[]],
         data: [],
