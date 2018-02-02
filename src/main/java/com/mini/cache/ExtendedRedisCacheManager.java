@@ -27,9 +27,9 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class ExtendedRedisCacheManager extends RedisCacheManager {
 
-	private static final ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("JavaScript");
+	private static final ScriptEngine SCRIPT_ENGINE = new ScriptEngineManager().getEngineByName("JavaScript");
 
-	private static final Pattern pattern = Pattern.compile("[+\\-*/%]");
+	private static final Pattern PATTERN = Pattern.compile("[+\\-*/%]");
 
 	/**
 	 * 分隔符
@@ -66,8 +66,8 @@ public class ExtendedRedisCacheManager extends RedisCacheManager {
 		Long expiration = null;
 		String expirationAsString = name.substring(separatorIndex + 1);
 		try {
-			if (pattern.matcher(expirationAsString).find()) {
-				expiration = NumberUtils.toLong(scriptEngine.eval(expirationAsString).toString(), defalutExp);
+			if (PATTERN.matcher(expirationAsString).find()) {
+				expiration = NumberUtils.toLong(SCRIPT_ENGINE.eval(expirationAsString).toString(), defalutExp);
 			} else {
 				expiration = NumberUtils.toLong(expirationAsString, defalutExp);
 			}

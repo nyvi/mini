@@ -3,7 +3,6 @@ package com.mini.cache;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -34,8 +33,8 @@ public class RedisConfig extends CachingConfigurerSupport {
 				key.append(target.getClass().getName()).append(".");
 				key.append(method.getName()).append(":");
 				key.append(Arrays.toString(objects));
-				String md5key = DigestUtils.md5Hex(key.toString()).substring(8, 24);
-				return md5key;
+				//String md5key = DigestUtils.md5Hex(key.toString()).substring(8, 24);
+				return key.toString();
 			}
 		};
 	}

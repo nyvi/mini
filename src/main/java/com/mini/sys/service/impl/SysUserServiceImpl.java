@@ -17,8 +17,9 @@ import com.mini.sys.service.SysUserService;
 @Service
 public class SysUserServiceImpl extends BaseServiceImpl<SysUserDO> implements SysUserService {
 	
+	
 	@Override
-	@Cacheable(value = "userList#1*60", unless = "#result.size() <= 10") //返回结果大于10的才缓存
+	@Cacheable(value = "userList", unless = "#result.size() <= 10") //返回结果大于10的才缓存
 	public List<SysUserDO> getList(SysUserQuery query) {
 		System.out.println("------------------执行了------------------");
 		return super.getList(query);

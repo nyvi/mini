@@ -65,7 +65,6 @@ public class SysUserController {
 	 * 列表数据
 	 * @return
 	 */
-	@Log
 	@ResponseBody
 	@PostMapping("getTableData")
 	public TableData<SysUserDO> getTableData(SysUserQuery query) {
@@ -73,9 +72,10 @@ public class SysUserController {
 	}
 	
 	/**
-	 * 获取所有用户列表 前100就好
+	 * 获取所有用户列表
 	 * @return
 	 */
+	@Log
 	@ResponseBody
 	@GetMapping(value = "getList")
 	public List<SysUserDO> getList(SysUserQuery query){
@@ -98,7 +98,7 @@ public class SysUserController {
 		if (Objects.isNull(sysUser.getId())) {
 			sysUser.setPassword(DigestUtils.md5Hex(sysUser.getPhone()).substring(8, 24));
 		}
-		SysUserQuery query = new SysUserQuery().setPhone(sysUser.getPhone());
+		SysUserQuery query = new SysUserQuery().setPhone(sysUser.getPhone()).setUsername("");
 		List<SysUserDO> list = sysUserService.getList(query);
 		if(!list.isEmpty() && !Objects.equals(list.get(0).getId(), sysUser.getId())){
 			return JsonResult.error("该手机已有绑定账号!");

@@ -37,7 +37,7 @@ public class CodeTest {
 	public void batchSvaeTest() throws Exception {
 		SysUserDO user = null;
 		long start = System.currentTimeMillis();
-		Long phone = 18800011002L;
+		Long phone = 18800111002L;
 		List<SysUserDO> list = new ArrayList<>(10000);
 		for (int i = 0; i < 10000; i++) {
 			phone++;

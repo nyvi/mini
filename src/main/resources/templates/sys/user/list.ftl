@@ -43,8 +43,8 @@
 										<th data-checkbox="true"></th>
 							    		<th data-field="username" data-sortable="true">用户名</th>
 							    		<th data-field="phone">手机号</th>
-							    		<th data-field="gmtCreate">创建时间</th>
-							    		<th data-field="gmtModified">修改时间</th>
+							    		<th data-field="gmtCreate" data-formatter="dateFormatter">创建时间</th>
+							    		<th data-field="gmtModified" data-formatter="dateFormatter">修改时间</th>
 										<th data-field="id" data-formatter="operateFormatter">操作</th>
 									</tr>
 								</thead>

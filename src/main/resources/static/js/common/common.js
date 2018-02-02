@@ -109,7 +109,35 @@ function statusFormatter(value) {
 
 // 时间格式化,默认时间参数yyyy-MM-dd HH:mm
 function dateFormatter(value, row, index) {
-	return util.dateFormat(value, "yyyy-MM-dd HH:mm");
+	return new Date(parseInt(value)).Format("yyyy-MM-dd HH:mm");
+}
+
+/**
+ * 时间格式化
+ * format 时间格式
+ */ 
+Date.prototype.Format = function (format) {
+	var map = {  
+	     "y": this.getFullYear(),  // 年
+		 "M": this.getMonth() + 1, // 月
+	     "d": this.getDate(), 	   // 日
+	     "H": this.getHours(),     // 时
+	     "m": this.getMinutes(),   // 分
+	     "s": this.getSeconds(),   // 秒
+	     "q": Math.floor((this.getMonth() + 3) / 3), // 季度
+	     "S": this.getMilliseconds() // 毫秒
+	};  
+	format = format.replace(/([yMdHms])+/g, function(all, t) {
+		var v = map[t];
+		if (v !== undefined) {
+			if (v < 10) {
+				return "0" + v;
+			}
+			return v
+		}
+		return all
+	});
+	return format;
 }
 
 var util = {
@@ -150,33 +178,9 @@ var util = {
 			return arg;
 		});
 		return flag ? str : '';
-	},
-	/**
-	 * 时间截取
-	 */
-	dateFormat : function(longdate, format) {
-		// yyyyMMddhhmmss
-		if (typeof longdate === "string" && longdate.length > 8) {
-			var map = {
-				"y" : longdate.substr(0, 4),
-				"M" : longdate.substr(4, 2),
-				"d" : longdate.substr(6, 2),
-				"H" : longdate.substr(8, 2),
-				"m" : longdate.substr(10, 2),
-				"s" : longdate.substr(12, 2)
-			};
-			format = format.replace(/([yMdHms])+/g, function(all, t) {
-				var v = map[t];
-				if (v !== undefined) {
-					return v
-				}
-				return all
-			});
-			return format;
-		}
-		return longdate;
 	}
 }
+ 
 
 // 修改 Validation 配置
 $.validator.setDefaults({
