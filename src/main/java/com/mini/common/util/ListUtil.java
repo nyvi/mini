@@ -5,11 +5,16 @@ import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 /**
  * list 工具类
  * @author czk
  * @date 2018-01-30
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ListUtil {
 
 	/**
@@ -17,7 +22,7 @@ public class ListUtil {
 	 * @param ids
 	 * @return
 	 */
-	public final static List<Long> convertFor(final String[] ids){
+	public final static List<Long> convertFor(final String[] ids) {
 		if (ArrayUtils.isEmpty(ids)) {
 			return new ArrayList<>(0);
 		}

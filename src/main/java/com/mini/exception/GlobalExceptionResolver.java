@@ -9,9 +9,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.alibaba.fastjson.JSON;
-import com.mini.common.dto.JsonResult;
+import com.mini.common.dto.Result;
+import com.nyvi.core.exception.ServiceException;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -23,31 +25,42 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @ControllerAdvice
 public class GlobalExceptionResolver {
-	
+
 	@ExceptionHandler(value = Exception.class)
-	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
+	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception exception) {
-		log.error(exception.toString());
-		StackTraceElement[] stackTrace = exception.getStackTrace();
-		StringBuffer msg = new StringBuffer();
-		for (StackTraceElement stackTraceElement : stackTrace) {
-			msg.append(stackTraceElement).append("\n");
-		}
-		log.error(msg.toString());
 		String requestType = request.getHeader("X-Requested-With");
 		if (StringUtils.isBlank(requestType)) {
 			return new ModelAndView("/error/500");
-		} else {
-			response.setCharacterEncoding("UTF-8");
-			response.setContentType("application/json; charset=utf-8");
-			JsonResult result = JsonResult.error("系统异常，请稍后重试！");
-			try {
-				response.getWriter().write(JSON.toJSONString(result));
-				response.getWriter().flush();
-			} catch (IOException e) {
-				log.error(e.getMessage());
-			}
 		}
+		Result result = null;
+		if (exception instanceof ServiceException) {
+			result = Result.error(exception.getMessage());
+		} else if (exception instanceof IllegalArgumentException) {
+			result = Result.error(exception.getMessage());
+		} else if (exception instanceof NoHandlerFoundException) {
+			result = Result.error("接口 [" + request.getRequestURI() + "] 不存在");
+		} else {
+			result = Result.error("接口 [" + request.getRequestURI() + "] 内部错误，请联系管理员");
+			log.error(exception.getMessage(), exception);
+		}
+		responseResult(response, result);
 		return null;
+	}
+
+	/**
+	 * json返回
+	 * @param response
+	 * @param result
+	 */
+	private void responseResult(HttpServletResponse response, Result result) {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=utf-8");
+		try {
+			response.getWriter().write(JSON.toJSONString(result));
+			response.getWriter().flush();
+		} catch (IOException e) {
+			log.error(e.getMessage());
+		}
 	}
 }

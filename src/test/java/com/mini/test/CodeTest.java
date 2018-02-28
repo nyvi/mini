@@ -1,17 +1,20 @@
 package com.mini.test;
 
-import com.mini.Application;
-import com.mini.sys.model.SysUserDO;
-import com.mini.sys.query.SysUserQuery;
-import com.mini.sys.service.SysUserService;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.mini.Application;
+import com.mini.sys.model.SysUserDO;
+import com.mini.sys.query.SysUserQuery;
+import com.mini.sys.service.SysUserService;
 
 /**
  * @author czk

@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.common.collect.Maps;
 import com.mini.common.annotations.Log;
-import com.mini.common.dto.JsonResult;
-import com.mini.common.dto.TableData;
-import com.mini.common.util.ErrorUtil;
+import com.mini.common.dto.Result;
 import com.mini.common.util.ListUtil;
+import com.mini.common.util.ValidateUtil;
 import com.mini.sys.model.SysUserDO;
 import com.mini.sys.query.SysUserQuery;
 import com.mini.sys.service.SysUserService;
+import com.nyvi.core.base.dto.TableData;
 
 /**
  * sysUserController
@@ -46,7 +47,7 @@ public class SysUserController {
 		ModelAndView mv = new ModelAndView("sys/user/list");
 		return mv;
 	}
-	
+
 	/**
 	 * 列表页面
 	 * @return
@@ -68,9 +69,10 @@ public class SysUserController {
 	@ResponseBody
 	@PostMapping("getTableData")
 	public TableData<SysUserDO> getTableData(SysUserQuery query) {
+		Maps.newHashMapWithExpectedSize(1);
 		return sysUserService.getTableData(query);
 	}
-	
+
 	/**
 	 * 获取所有用户列表
 	 * @return
@@ -78,10 +80,10 @@ public class SysUserController {
 	@Log
 	@ResponseBody
 	@GetMapping(value = "getList")
-	public List<SysUserDO> getList(SysUserQuery query){
+	public List<SysUserDO> getList(SysUserQuery query) {
 		return sysUserService.getList(query);
 	}
-	
+
 	/**
 	 * 保存/更新
 	 * @param sysUser
@@ -91,20 +93,18 @@ public class SysUserController {
 	 */
 	@ResponseBody
 	@PostMapping("save")
-	public JsonResult save(@Valid SysUserDO sysUser, BindingResult result) throws Exception {
-		if (result.hasErrors()) {
-			return ErrorUtil.getError(result);
-		}
+	public Result save(@Valid SysUserDO sysUser, BindingResult result) throws Exception {
+		ValidateUtil.checkArgument(result);
 		if (Objects.isNull(sysUser.getId())) {
 			sysUser.setPassword(DigestUtils.md5Hex(sysUser.getPhone()).substring(8, 24));
 		}
 		SysUserQuery query = new SysUserQuery().setPhone(sysUser.getPhone()).setUsername("");
 		List<SysUserDO> list = sysUserService.getList(query);
-		if(!list.isEmpty() && !Objects.equals(list.get(0).getId(), sysUser.getId())){
-			return JsonResult.error("该手机已有绑定账号!");
+		if (!list.isEmpty() && !Objects.equals(list.get(0).getId(), sysUser.getId())) {
+			return Result.error("该手机已有绑定账号!");
 		}
 		int ret = sysUserService.saveOrUpdate(sysUser);
-		return ret > 0 ? JsonResult.success("保存成功!") : JsonResult.error("保存失败!");
+		return ret > 0 ? Result.success("保存成功!") : Result.error("保存失败!");
 	}
 
 	/**
@@ -115,13 +115,13 @@ public class SysUserController {
 	 */
 	@ResponseBody
 	@PostMapping(value = "delete")
-	public JsonResult delete(HttpServletRequest request) throws Exception {
+	public Result delete(HttpServletRequest request) throws Exception {
 		String[] ids = request.getParameterValues("checkedid");
 		List<Long> idList = ListUtil.convertFor(ids);
 		if (idList.isEmpty()) {
-			return JsonResult.error("请选择要删除的记录!");
+			return Result.error("请选择要删除的记录!");
 		}
 		int ret = sysUserService.batchDelete(idList);
-		return ret > 0 ? JsonResult.success("删除成功") : JsonResult.error("删除失败");
+		return ret > 0 ? Result.success("删除成功") : Result.error("删除失败");
 	}
 }

@@ -2,9 +2,9 @@ package com.mini.sys.service;
 
 import java.util.List;
 
-import com.mini.common.base.service.BaseService;
 import com.mini.sys.model.SysUserDO;
 import com.mini.sys.query.SysUserQuery;
+import com.nyvi.core.base.service.BaseService;
 
 /**
  * sysUser接口

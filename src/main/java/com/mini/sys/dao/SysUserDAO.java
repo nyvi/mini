@@ -1,8 +1,9 @@
 package com.mini.sys.dao;
 
-import com.mini.common.base.dao.BaseDAO;
-import com.mini.sys.model.SysUserDO;
 import org.springframework.stereotype.Repository;
+
+import com.mini.sys.model.SysUserDO;
+import com.nyvi.core.base.dao.BaseDAO;
 
 /**
  * 用户

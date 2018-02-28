@@ -1,8 +1,8 @@
 package com.mini.sys.query;
 
-import com.mini.common.annotations.Query;
-import com.mini.common.base.query.BaseQuery;
-import com.mini.common.enums.Operate;
+import com.nyvi.core.annotation.Query;
+import com.nyvi.core.base.query.BaseQuery;
+import com.nyvi.core.enums.Operate;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
