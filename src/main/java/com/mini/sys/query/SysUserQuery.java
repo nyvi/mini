@@ -1,8 +1,8 @@
 package com.mini.sys.query;
 
-import com.nyvi.core.annotation.Query;
-import com.nyvi.core.base.query.BaseQuery;
-import com.nyvi.core.enums.Operate;
+
+import com.nyvi.support.annotation.Query;
+import com.nyvi.support.base.query.BaseQuery;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,8 +21,9 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 public class SysUserQuery extends BaseQuery {
 
-	@Query(operate = Operate.LIKE, suffix = "%")
+	@Query
 	public String username;
-
+	
+	@Query
 	public String phone;
 }

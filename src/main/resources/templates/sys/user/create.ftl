@@ -47,7 +47,7 @@
 		function showResponse(responseText, statusText) {
 			var code = responseText.code;
 			var msg = responseText.msg;
-			if (code == "1") {
+			if (code == "200") {
 				layer.alert(msg,{icon: 1}, function(index){
 					location.href="${contextPath}/sys/user/list.html";
 				 	layer.close(index);

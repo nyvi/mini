@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mini.sys.model.SysUserDO;
 import com.mini.sys.query.SysUserQuery;
-import com.nyvi.core.base.service.BaseService;
+import com.nyvi.support.base.service.BaseService;
 
 /**
  * sysUser接口
@@ -18,4 +18,11 @@ public interface SysUserService extends BaseService<SysUserDO> {
 	 * @return
 	 */
 	List<SysUserDO> getList(SysUserQuery query);
+	
+	/**
+	 * 修改/更新
+	 * @param sysUser
+	 * @return
+	 */
+	int saveOrUpdate(SysUserDO sysUser) throws Exception;
 }

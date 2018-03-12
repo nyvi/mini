@@ -1,19 +1,11 @@
 package com.mini.exception;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.NoHandlerFoundException;
-
-import com.alibaba.fastjson.JSON;
-import com.mini.common.dto.Result;
-import com.nyvi.core.exception.ServiceException;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -29,14 +21,13 @@ public class GlobalExceptionResolver {
 	@ExceptionHandler(value = Exception.class)
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception exception) {
-		String requestType = request.getHeader("X-Requested-With");
+		log.error(exception.getMessage(), exception);
+		/*String requestType = request.getHeader("X-Requested-With");
 		if (StringUtils.isBlank(requestType)) {
-			return new ModelAndView("/error/500");
+			//return new ModelAndView("/error/500");
 		}
 		Result result = null;
-		if (exception instanceof ServiceException) {
-			result = Result.error(exception.getMessage());
-		} else if (exception instanceof IllegalArgumentException) {
+		if (exception instanceof IllegalArgumentException) {
 			result = Result.error(exception.getMessage());
 		} else if (exception instanceof NoHandlerFoundException) {
 			result = Result.error("接口 [" + request.getRequestURI() + "] 不存在");
@@ -44,7 +35,7 @@ public class GlobalExceptionResolver {
 			result = Result.error("接口 [" + request.getRequestURI() + "] 内部错误，请联系管理员");
 			log.error(exception.getMessage(), exception);
 		}
-		responseResult(response, result);
+		responseResult(response, result);*/
 		return null;
 	}
 
@@ -53,7 +44,7 @@ public class GlobalExceptionResolver {
 	 * @param response
 	 * @param result
 	 */
-	private void responseResult(HttpServletResponse response, Result result) {
+/*	private void responseResult(HttpServletResponse response, Result result) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=utf-8");
 		try {
@@ -62,5 +53,5 @@ public class GlobalExceptionResolver {
 		} catch (IOException e) {
 			log.error(e.getMessage());
 		}
-	}
+	}*/
 }

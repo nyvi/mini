@@ -3,7 +3,7 @@ package com.mini.sys.dao;
 import org.springframework.stereotype.Repository;
 
 import com.mini.sys.model.SysUserDO;
-import com.nyvi.core.base.dao.BaseDAO;
+import com.nyvi.support.base.dao.BaseDAO;
 
 /**
  * 用户

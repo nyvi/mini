@@ -1,5 +1,6 @@
 package com.mini.sys.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.common.collect.Maps;
 import com.mini.common.annotations.Log;
 import com.mini.common.dto.Result;
 import com.mini.common.util.ListUtil;
@@ -24,7 +24,7 @@ import com.mini.common.util.ValidateUtil;
 import com.mini.sys.model.SysUserDO;
 import com.mini.sys.query.SysUserQuery;
 import com.mini.sys.service.SysUserService;
-import com.nyvi.core.base.dto.TableData;
+import com.nyvi.support.base.dto.TableResult;
 
 /**
  * sysUserController
@@ -68,8 +68,7 @@ public class SysUserController {
 	 */
 	@ResponseBody
 	@PostMapping("getTableData")
-	public TableData<SysUserDO> getTableData(SysUserQuery query) {
-		Maps.newHashMapWithExpectedSize(1);
+	public TableResult<SysUserDO> getTableData(SysUserQuery query) {
 		return sysUserService.getTableData(query);
 	}
 
@@ -103,6 +102,8 @@ public class SysUserController {
 		if (!list.isEmpty() && !Objects.equals(list.get(0).getId(), sysUser.getId())) {
 			return Result.error("该手机已有绑定账号!");
 		}
+		sysUser.setGmtCreate(new Date());
+		sysUser.setGmtModified(new Date());
 		int ret = sysUserService.saveOrUpdate(sysUser);
 		return ret > 0 ? Result.success("保存成功!") : Result.error("保存失败!");
 	}

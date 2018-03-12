@@ -37,14 +37,16 @@
 								  data-sort-name="username" data-sort-order="desc"
 								  style="width:4000px;table-layout: fixed;"
 								  -->
+								  data-sort-name="gmtCreate"
+								  data-sort-order="desc"
 								 >
 								<thead>
 									<tr>
 										<th data-checkbox="true"></th>
 							    		<th data-field="username" data-sortable="true">用户名</th>
 							    		<th data-field="phone">手机号</th>
-							    		<th data-field="gmtCreate" data-formatter="dateFormatter">创建时间</th>
-							    		<th data-field="gmtModified" data-formatter="dateFormatter">修改时间</th>
+							    		<th data-field="gmtCreate">创建时间</th>
+							    		<th data-field="gmtModified">修改时间</th>
 										<th data-field="id" data-formatter="operateFormatter">操作</th>
 									</tr>
 								</thead>
@@ -85,7 +87,7 @@
 		function showResponse(responseText, statusText) {
 			var code = responseText.code;
 			var msg = responseText.msg;
-			if (code == "1") {
+			if (code == "200") {
 				  layer.alert(msg,{icon: 1}, function(index){
 					  $("#table").bootstrapTable('refresh');
 				 	  layer.close(index);

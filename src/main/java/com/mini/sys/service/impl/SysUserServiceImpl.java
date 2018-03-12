@@ -1,6 +1,7 @@
 package com.mini.sys.service.impl;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mini.sys.model.SysUserDO;
 import com.mini.sys.query.SysUserQuery;
 import com.mini.sys.service.SysUserService;
-import com.nyvi.core.base.service.impl.BaseServiceImpl;
+import com.nyvi.support.base.service.impl.BaseServiceImpl;
 
 /**
  * @author czk
@@ -22,6 +23,14 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDO> implements Sy
 	public List<SysUserDO> getList(SysUserQuery query) {
 		System.out.println("------------------执行了------------------");
 		return super.getList(query);
+	}
+
+	@Override
+	public int saveOrUpdate(SysUserDO sysUser) throws Exception {
+		if (Objects.isNull(sysUser.getId())) {
+			return this.save(sysUser);
+		}
+		return this.update(sysUser);
 	}
 
 }

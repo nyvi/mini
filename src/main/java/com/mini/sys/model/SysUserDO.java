@@ -1,14 +1,13 @@
 package com.mini.sys.model;
 
-import org.hibernate.validator.constraints.NotBlank;
+import java.io.Serializable;
+import java.util.Date;
 
-import com.nyvi.core.annotation.Column;
-import com.nyvi.core.annotation.Table;
-import com.nyvi.core.base.mode.BaseDO;
+import com.nyvi.support.annotation.Column;
+import com.nyvi.support.annotation.Id;
+import com.nyvi.support.annotation.Table;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
 /**
  * 系统用户
@@ -16,29 +15,43 @@ import lombok.ToString;
  * @date 2018-01-13
  */
 @Data
-@Table(name = "sys_user")
+@Table("sys_user")
 @SuppressWarnings("serial")
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class SysUserDO extends BaseDO {
-
+public class SysUserDO implements Serializable{
+	
+	/**
+	 * id
+	 */
+	@Id
+	private Long id;
+	
 	/**
 	 * 用户名
 	 */
 	@Column
-	@NotBlank(message = "用户名不能为空！")
 	private String username;
 
 	/**
 	 * 手机号
 	 */
 	@Column
-	@NotBlank(message = "手机号码不能为空!")
 	private String phone;
 
 	/**
 	 * 密码
 	 */
-	@Column(name = "password")
+	@Column
 	private String password;
+	
+	/**
+	 * 创建时间
+	 */
+	@Column
+	private Date gmtCreate;
+	
+	/**
+	 * 修改时间
+	 */
+	@Column
+	private Date gmtModified;
 }
