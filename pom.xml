@@ -21,6 +21,7 @@
 		<fastjson.version>1.2.45</fastjson.version>
 		<disruptor.version>3.3.7</disruptor.version>
 		<commons-lang.version>3.7</commons-lang.version>
+		<spring-boot-starter-jdbc-helper.version>1.1.0</spring-boot-starter-jdbc-helper.version>
 	</properties>
 
 	<dependencies>
@@ -134,7 +135,7 @@
 		<dependency>
 			<groupId>com.github.nyvi</groupId>
 			<artifactId>spring-boot-starter-jdbc-helper</artifactId>
-			<version>1.1.0</version>
+			<version>${spring-boot-starter-jdbc-helper.version}</version>
 		</dependency>
 
 	</dependencies>

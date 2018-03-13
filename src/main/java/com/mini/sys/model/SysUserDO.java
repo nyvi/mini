@@ -17,14 +17,14 @@ import lombok.Data;
 @Data
 @Table("sys_user")
 @SuppressWarnings("serial")
-public class SysUserDO implements Serializable{
-	
+public class SysUserDO implements Serializable {
+
 	/**
 	 * id
 	 */
 	@Id
 	private Long id;
-	
+
 	/**
 	 * 用户名
 	 */
@@ -42,13 +42,13 @@ public class SysUserDO implements Serializable{
 	 */
 	@Column
 	private String password;
-	
+
 	/**
 	 * 创建时间
 	 */
-	@Column
+	@Column(update = false)
 	private Date gmtCreate;
-	
+
 	/**
 	 * 修改时间
 	 */
